@@ -5,6 +5,12 @@ import { outlineCollections } from './functions/outlineCollections';
 const app = express();
 const port = 8080; // default port to listen
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // todo
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.get('/outline', async (req, res) => {
   try {
     const uri: string = req.query.uri as string;
