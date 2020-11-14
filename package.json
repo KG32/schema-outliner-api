@@ -1,0 +1,28 @@
+{
+  "name": "schema-outliner-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && node .",
+    "devWatch": "nodemon --watch 'src' -e ts,js --exec 'npm start'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KG32/schema-outliner-api.git"
+  },
+  "author": "KG32",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KG32/schema-outliner-api/issues"
+  },
+  "homepage": "https://github.com/KG32/schema-outliner-api#readme",
+  "dependencies": {
+    "@types/express": "^4.17.9",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  }
+}
