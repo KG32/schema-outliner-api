@@ -1,13 +1,14 @@
-interface CollectionData {
+export interface CollectionData {
   name: string;
   docs: {
     [key: string]: any;
   }
 }
 
-interface OutlinedCollection {
+export interface OutlinedCollection {
   name: string;
   keys: OutlinedKey[];
+  docsCount: number;
 }
 
 interface OutlinedKey {
@@ -52,7 +53,6 @@ function outlineCollections(collectionsData: CollectionData[]): OutlinedCollecti
     outlinedCollection.keys.sort((x, y) => x.percentage - y.percentage);
     outlinedCollections.push(outlinedCollection);
   }
-
   return outlinedCollections;
 }
 

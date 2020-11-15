@@ -1,13 +1,19 @@
 import * as MongoClient from 'mongodb';
+import { CollectionData } from './outlineCollections';
 
-async function getCollectionsData(uri: string, dbName: string, collectionsNames: string[]) {
+async function getCollectionsData(uri: string, dbName: string): Promise<CollectionData[]> {
   const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   const db = client.db(dbName);
-  const collections = await Promise.all(collectionsNames.map(async (colName) => {
-    const col = db.collection(colName);
-    const docs = await col.find({}).toArray();
-    return { name: colName, docs };
-  }));
+  const dbCollections = await db.listCollections().toArray();
+  if (!dbCollections.length) throw new Error('dbEmptyOrNotFound');
+  const collections: CollectionData[] = [];
+  for (let i = 0; i < dbCollections.length; i++) {
+    const colName = dbCollections[i].name;
+    const collection = db.collection(colName);
+    const docs = await collection.find({}).toArray();
+    collections.push({ name: colName, docs });
+  }
+
   return collections;
 }
 
